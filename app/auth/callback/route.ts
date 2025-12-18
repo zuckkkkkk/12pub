@@ -1,16 +1,16 @@
-import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
+  const { searchParams, origin } = new URL(request.url)
+
   const code = searchParams.get('code')
   const error = searchParams.get('error')
 
-  // ✅ URL pubblico reale
-  const origin = process.env.NEXT_PUBLIC_SITE_URL!
-
   if (error) {
-    return NextResponse.redirect(`${origin}/auth?error=${error}`)
+    return NextResponse.redirect(
+      new URL(`/auth?error=${error}`, origin)
+    )
   }
 
   if (code) {
@@ -19,11 +19,17 @@ export async function GET(request: Request) {
       await supabase.auth.exchangeCodeForSession(code)
 
     if (exchangeError) {
-      return NextResponse.redirect(`${origin}/auth?error=auth_failed`)
+      return NextResponse.redirect(
+        new URL('/auth?error=auth_failed', origin)
+      )
     }
 
-    return NextResponse.redirect(`${origin}/dashboard`)
+    return NextResponse.redirect(
+      new URL('/dashboard', origin)
+    )
   }
 
-  return NextResponse.redirect(`${origin}/auth?error=no_code`)
+  return NextResponse.redirect(
+    new URL('/auth?error=no_code', origin)
+  )
 }
