@@ -4,6 +4,9 @@ import './globals.css'
 export const metadata: Metadata = {
   title: '12 Pubs of Bologna',
   description: 'La sfida natalizia dei 12 pub!',
+   icons: {
+    icon: '/icon.webp',
+  },
 }
 
 export default function RootLayout({

@@ -79,7 +79,7 @@ export default async function DashboardPage() {
     <div className="container py-6 space-y-6">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="font-display text-3xl font-bold text-zinc-100">
+        <h1 className="font-display text-3xl font-bold text-zinc-100 mt-6">
           Ciao, <span className="text-gold">{profile.username}</span>! 👋
         </h1>
         <p className="text-zinc-400">
@@ -120,7 +120,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Activities List */}
-      <div className="space-y-3">
+      <div className="space-y-3 mb-14">
         <h2 className="font-display text-xl font-semibold text-zinc-100">
           Le 12 Tappe
         </h2>
